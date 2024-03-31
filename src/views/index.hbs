@@ -1,12 +1,47 @@
 <div class="container p-5">
   <div class="row">
+    <div class="col-md-12 text-md-end mb-3">
+      <!-- Botón para abrir el modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#taskModal">
+        Agregar
+      </button>
 
-    <div class="col-md-5">
-      {{> tasks/taskForm }}
+       <button class="btn btn-info" onclick="copyAllProducts()">Listo</button>
     </div>
-
-    <div class="col-md-7">
-      {{> tasks/taskTable }}
+     <div class="col-12">
+      {{#if tasks}}
+      <div class="table-responsive">
+         {{> tasks/taskTable }}
+      </div>
+      {{else}}
+      <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="text-center text-white">
+          <h1>No tasks</h1>
+          <img src="/icons/empty.svg" class="w-75" />
+        </div>
+      </div>
+      {{/if}}
     </div>
   </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="taskModalLabel">Agregar Tarea</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Contenido del formulario -->
+        {{> tasks/taskForm }}
+      </div>
+    </div>
+  </div>
+</div>
+
+

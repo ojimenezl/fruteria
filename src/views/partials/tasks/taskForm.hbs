@@ -1,10 +1,10 @@
 <div class="card card-body p-4 rounded-0 bg-dark text-white">
-  <h3>Add A Task</h3>
+  <h3>Agregar Producto</h3>
   <form action="/tasks/add" method="post">
 
     {{! Title Input }}
     <div class="mb-3">
-      <label for="title">Write a title:</label>
+      <label for="title">Producto:</label>
       <input
         id="title"
         class="form-control rounded-0 bg-dark text-white"
@@ -17,7 +17,7 @@
 
     {{! Description Input }}
     <div class="mb-3">
-      <label for="description">Description</label>
+      <label for="description">Cantidad</label>
       <textarea
         class="form-control rounded-0 bg-dark text-white"
         name="description"
@@ -26,6 +26,6 @@
       ></textarea>
     </div>
 
-    <button class="btn btn-primary" type="submit">Add</button>
+    <button class="btn btn-primary" type="submit">Guardar</button>
   </form>
 </div>
