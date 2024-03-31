@@ -2,7 +2,7 @@ const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
 const { create } = require("express-handlebars");
-// const indexRoutes = require("./routes/tasks.routes.js"); // Comenta esta línea para desactivar las rutas
+const indexRoutes = require("./routes/tasks.routes.js");
 
 const app = express();
 
@@ -25,7 +25,7 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 
 // routes
-// app.use(indexRoutes); // Comenta esta línea para desactivar las rutas
+app.use(indexRoutes);
 
 // public route
 app.use(express.static(path.join(__dirname, "public")));
