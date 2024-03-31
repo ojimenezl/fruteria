@@ -1,6 +1,6 @@
-import Task from "../model/Task";
+const Task = require("../model/Task.js");
 
-export const renderTasks = async (req, res) => {
+exports.renderTasks = async (req, res) => {
   try {
     const tasks = await Task.find().lean();
     res.render("index", {
@@ -12,7 +12,7 @@ export const renderTasks = async (req, res) => {
   }
 };
 
-export const createTask = async (req, res, next) => {
+exports.createTask = async (req, res, next) => {
   try {
     const task = new Task(req.body);
     await task.save();
@@ -22,7 +22,7 @@ export const createTask = async (req, res, next) => {
   }
 };
 
-export const taskToggleDone = async (req, res, next) => {
+exports.taskToggleDone = async (req, res, next) => {
   let { id } = req.params;
   const task = await Task.findById(id);
   task.done = !task.done;
@@ -30,18 +30,18 @@ export const taskToggleDone = async (req, res, next) => {
   res.redirect("/");
 };
 
-export const renderTaskEdit = async (req, res, next) => {
+exports.renderTaskEdit = async (req, res, next) => {
   const task = await Task.findById(req.params.id).lean();
   res.render("edit", { task });
 };
 
-export const editTask = async (req, res, next) => {
+exports.editTask = async (req, res, next) => {
   const { id } = req.params;
   await Task.updateOne({ _id: id }, req.body);
   res.redirect("/");
 };
 
-export const deleteTask = async (req, res, next) => {
+exports.deleteTask = async (req, res, next) => {
   let { id } = req.params;
   await Task.remove({ _id: id });
   res.redirect("/");

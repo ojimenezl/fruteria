@@ -1,9 +1,8 @@
-import path from "path";
-import express from "express";
-import morgan from "morgan";
-import { create } from "express-handlebars";
-
-import indexRoutes from "./routes/tasks.routes";
+const path = require("path");
+const express = require("express");
+const morgan = require("morgan");
+const { create } = require("express-handlebars");
+const indexRoutes = require("./routes/tasks.routes.js");
 
 const app = express();
 
@@ -35,4 +34,4 @@ app.use((req, res, next) => {
   res.status(404).render("404");
 });
 
-export default app;
+module.exports = app;

@@ -1,6 +1,9 @@
-import { config } from "dotenv";
+const { config } = require("dotenv");
+
 
 config();
 
-export const MONGODB_URI =
+const MONGODB_URI =
   process.env.MONGODB_URI || "mongodb+srv://joboxappec:IVAgz0x72PYCq9tY@cluster0.yenknyq.mongodb.net/";
+
+module.exports = { MONGODB_URI };

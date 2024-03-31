@@ -1,5 +1,8 @@
-import { connect } from "mongoose";
-import { MONGODB_URI } from "../config";
+const mongoose = require("mongoose");
+const connect = mongoose.connect;
+
+const { MONGODB_URI } = require("../config.js");
+
 
 // connection to db
 (async () => {

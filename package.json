@@ -1,6 +1,5 @@
 {
   "name": "node-mongodb-crud",
-  "type": "commonjs",
   "version": "1.0.0",
   "description": "",
   "main": "babel-node src/index.js",
@@ -17,6 +16,7 @@
     "@babel/node": "^7.23.9",
     "@babel/plugin-transform-runtime": "^7.16.7",
     "@babel/preset-env": "^7.24.3",
+    "module-alias": "^2.2.3",
     "ncp": "^2.0.0",
     "nodemon": "^2.0.22"
   },
