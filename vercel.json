@@ -17,6 +17,10 @@
                 "DELETE",
                 "OPTIONS"
             ]
+        },
+        {
+            "src": "/public/(.*)",
+            "dest": "dist/$1"
         }
     ]
-    }
+}

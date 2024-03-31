@@ -1,5 +1,8 @@
 import app from "./app";
 import "./utils/mongoose";
 
-app.listen(app.get("port"));
-console.log(`server on port ${app.get("port")}`);
+const port = process.env.PORT || 3000; // Usa el puerto definido por la variable de entorno PORT, o 3000 si no está definido
+
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
