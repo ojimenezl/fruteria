@@ -8,7 +8,8 @@
     "express": "^4.17.2",
     "express-handlebars": "^6.0.2",
     "mongoose": "^6.1.5",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "sweetalert2": "^11.10.7"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.1",

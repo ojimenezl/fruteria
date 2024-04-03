@@ -21,8 +21,11 @@
           {{else}}
           <a class="btn btn-dark" href="/tasks/{{_id}}/toggleDone">Pedir</a>
           {{/if}}
-          <a href="/tasks/{{_id}}/delete" class="btn btn-danger"><i class="fas fa-trash"></i></a>
           <a href="/tasks/{{_id}}/edit" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a>
+          {{!-- <a href="/tasks/{{_id}}/delete" class="btn btn-danger"><i class="fas fa-trash"></i></a> --}}
+          {{!-- agrego una funcion para luego ejecutar detro de mi sweet alert la ruta:/tasks/{{_id}}/delete --}}
+          <button onclick="deleteProduct('{{_id}}')" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+
         </div>
       </td>
 
