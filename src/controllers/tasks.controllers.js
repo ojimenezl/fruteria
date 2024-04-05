@@ -46,3 +46,13 @@ exports.deleteTask = async (req, res, next) => {
   await Task.remove({ _id: id });
   res.redirect("/");
 };
+
+exports.goToContacto = async (req, res, next) => {
+  try {
+    console.log("aqui");
+    res.render("contacto");
+  } catch (error) {
+    console.log({ error });
+    return res.render("error", { errorMessage: error.message });
+  }
+};
