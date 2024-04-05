@@ -23,12 +23,18 @@ exports.createTask = async (req, res, next) => {
 };
 
 exports.taskToggleDone = async (req, res, next) => {
-  let { id } = req.params;
-  const task = await Task.findById(id);
-  task.done = !task.done;
-  await task.save();
-  res.redirect("/");
+  try {
+    let { id } = req.params;
+    const task = await Task.findById(id);
+    task.done = !task.done;
+    await task.save();
+    res.status(200).send({ message: "Estado del producto actualizado exitosamente" });
+  } catch (error) {
+    console.error("Hubo un error al cambiar el estado del producto:", error);
+    res.status(500).send({ error: "Hubo un problema al cambiar el estado del producto" });
+  }
 };
+
 
 exports.renderTaskEdit = async (req, res, next) => {
   const task = await Task.findById(req.params.id).lean();

@@ -17,10 +17,11 @@
       <td class="acciones">
         <div class="btn-group">
           {{#if done}}
-          <a class="btn btn-success" href="/tasks/{{_id}}/toggleDone">Listo</a>
+          <button class="btn btn-success toggle-button" data-id="{{_id}}">Listo</button>
           {{else}}
-          <a class="btn btn-dark" href="/tasks/{{_id}}/toggleDone">Pedir</a>
+          <button class="btn btn-dark toggle-button" data-id="{{_id}}">Pedir</button>
           {{/if}}
+
           <a href="/tasks/{{_id}}/edit" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a>
           {{!-- <a href="/tasks/{{_id}}/delete" class="btn btn-danger"><i class="fas fa-trash"></i></a> --}}
           {{!-- agrego una funcion para luego ejecutar detro de mi sweet alert la ruta:/tasks/{{_id}}/delete --}}

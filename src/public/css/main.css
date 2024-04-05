@@ -1,3 +1,10 @@
 .bg-black {
   background-color: #111111 !important;
 }
+.btn-success {
+  background-color: success; /* Color verde para el estado "Listo" */
+}
+
+.btn-dark {
+  background-color: dark; /* Color negro para el estado "Pedir" */
+}
