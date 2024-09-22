@@ -2,16 +2,15 @@
   <div class="row">
     <div class="col-md-12 text-md-end mb-3">
       <!-- Botón para abrir el modal -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#taskModal">
+      {{!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#taskModal">
         Agregar
-      </button>
-
-       <button class="btn btn-info" onclick="copyAllProducts()">Listo</button>
+      </button> --}}
+       <button class="btn btn-info" onclick="copyAllProductsCocina()">Listo</button>
     </div>
      <div class="col-12">
       {{#if tasks}}
       <div class="table-responsive">
-         {{> tasks/taskTable }}
+         {{> tasks/taskTableCocina }}
       </div>
       {{else}}
       <div class="h-100 d-flex align-items-center justify-content-center">

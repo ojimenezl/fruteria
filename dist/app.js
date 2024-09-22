@@ -1,40 +1,42 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-Object.defineProperty(exports, "__esModule", {
-  value: true
+var path = require("path");
+var express = require("express");
+var morgan = require("morgan");
+var _require = require("express-handlebars"),
+  create = _require.create;
+var indexRoutes = require("./routes/tasks.routes.js");
+var Handlebars = require('handlebars');
+var app = express();
+
+// Registrar el helper eq
+Handlebars.registerHelper('eq', function (a, b) {
+  return a === b;
 });
-exports["default"] = void 0;
-var _path = _interopRequireDefault(require("path"));
-var _express = _interopRequireDefault(require("express"));
-var _morgan = _interopRequireDefault(require("morgan"));
-var _expressHandlebars = require("express-handlebars");
-var _tasks = _interopRequireDefault(require("./routes/tasks.routes"));
-var app = (0, _express["default"])();
 
 // settings
 app.set("port", process.env.PORT || 3000);
-app.set("views", _path["default"].join(__dirname, "views"));
-app.engine(".hbs", (0, _expressHandlebars.create)({
-  layoutsDir: _path["default"].join(app.get("views"), "layouts"),
-  partialsDir: _path["default"].join(app.get("views"), "partials"),
+app.set("views", path.join(__dirname, "views"));
+app.engine(".hbs", create({
+  layoutsDir: path.join(app.get("views"), "layouts"),
+  partialsDir: path.join(app.get("views"), "partials"),
   defaulLayout: "main",
   extname: ".hbs"
 }).engine);
 app.set("view engine", ".hbs");
 
 // middlewares
-app.use((0, _morgan["default"])("dev"));
-app.use(_express["default"].urlencoded({
+app.use(morgan("dev"));
+app.use(express.urlencoded({
   extended: false
 }));
 
 // routes
-app.use(_tasks["default"]);
+app.use(indexRoutes);
 
 // public route
-app.use(_express["default"]["static"](_path["default"].join(__dirname, "public")));
+app.use(express["static"](path.join(__dirname, "public")));
 app.use(function (req, res, next) {
   res.status(404).render("404");
 });
-var _default = exports["default"] = app;
+module.exports = app;

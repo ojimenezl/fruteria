@@ -2,20 +2,11 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 
-const TaskSchema = Schema(
+const CommentSchema = Schema(
   {
-    title: { type: String, required: true, trim: true, unique: true },
-    description: {
-      type: String,
-      trim: true,
-    },
     comentarioPedido: {
       type: String,
       trim: true,
-    },
-    done: {
-      type: Boolean,
-      default: false,
     },
     pedido: {
       type: Boolean,
@@ -28,4 +19,4 @@ const TaskSchema = Schema(
   }
 );
 
-module.exports = model("Task", TaskSchema);
+module.exports = model("Comment", CommentSchema);

@@ -3,8 +3,14 @@ const express = require("express");
 const morgan = require("morgan");
 const { create } = require("express-handlebars");
 const indexRoutes = require("./routes/tasks.routes.js");
+const Handlebars = require('handlebars');
 
 const app = express();
+
+// Registrar el helper eq
+Handlebars.registerHelper('eq', function(a, b) {
+  return a === b;
+});
 
 // settings
 app.set("port", process.env.PORT || 3000);

@@ -1,0 +1,56 @@
+{{#if tasks}}
+<table class="table table-bordered table-hover table-dark table-sm">
+  <thead>
+    <tr class="product-row">
+      {{!-- <th>N°</th> --}}
+      <th class="producto">Producto</th>
+      <th class="comentario">Comentario</th>
+      <th class="pedidos">Pedidos</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each tasks}}
+    <tr>
+      {{!-- <td>{{@index}}</td> --}}
+      <td class="producto">{{title}}</td>
+      <td class="comentario">
+        {{#if pedido}}
+        {{comentarioPedido}}
+        {{/if}}
+        </td>
+      <td class="pedidos">
+         <div class="btn-group">
+          {{#if pedido}}
+              <button class="btn btn-secondary toggle-pedido-button" data-id="{{_id}}" data-comentario="">
+                  <i class="fas fa-check"></i> <!-- Icono de check cuando el pedido está hecho -->
+              </button>
+              <a href="/tasks/{{_id}}/addCommentPedido" class="btn btn-info"><i class="fas fa-comments"></i></a>
+              <a class="btn btn-dark toggle-reloj-button" data-id="{{_id}}">
+                  <i class="fas fa-hourglass-start" style="color: #5d6af4;"></i> <!-- Este es el botón de reloj -->
+              </a>
+          {{else}}
+              <button class="btn btn-warning toggle-pedido-button" data-id="{{_id}}" data-comentario="Pedir">
+                  Pedir
+              </button>
+              <a href="/tasks/{{_id}}/addCommentPedido" class="btn btn-info"><i class="fas fa-comments"></i></a>
+              <a class="btn btn-dark toggle-reloj-button" data-id="{{_id}}">
+                  <i class="fas fa-check" style="color: #1ae3aa;"></i> <!-- Este es el botón de check -->
+              </a>
+          {{/if}}
+        </div>
+      </td>
+      
+
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{else}}
+<div class="h-100 d-flex align-items-center justify-content-center">
+  <div class="text-center text-white">
+    <h1>No tasks</h1>
+    <img src="/icons/empty.svg" class="w-75" />
+  </div>
+
+</div>
+{{/if}}

@@ -3,24 +3,10 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema,
   model = mongoose.model;
-var TaskSchema = Schema({
-  title: {
-    type: String,
-    required: true,
-    trim: true,
-    unique: true
-  },
-  description: {
-    type: String,
-    trim: true
-  },
+var CommentSchema = Schema({
   comentarioPedido: {
     type: String,
     trim: true
-  },
-  done: {
-    type: Boolean,
-    "default": false
   },
   pedido: {
     type: Boolean,
@@ -30,4 +16,4 @@ var TaskSchema = Schema({
   timestamps: true,
   versionKey: false
 });
-module.exports = model("Task", TaskSchema);
+module.exports = model("Comment", CommentSchema);

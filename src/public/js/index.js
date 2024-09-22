@@ -1,3 +1,6 @@
+document.querySelector('.refresh-button').addEventListener('click', function () {
+    location.reload();  // Recarga la página actual
+});
 function copyAllProducts() {
     // Inicializar una cadena de texto para almacenar los productos listos
     let readyProducts = '';
@@ -8,12 +11,12 @@ function copyAllProducts() {
 
     // Iterar sobre todas las filas y obtener el título y la cantidad de cada producto listo
     rows.forEach(row => {
+        
         const productTitle = row.querySelector('.producto').innerText.trim();
         const productQuantity = row.querySelector('.cantidad').innerText.trim();
-        const productStatus = row.querySelector('.acciones button').innerText.trim();
-
+        const productStatus = row.querySelector('.acciones button').querySelector('i').className;
         // Verificar si el producto está marcado como "Listo"
-        if (productStatus === 'Listo') {
+        if (productStatus === 'fas fa-check') {
             readyProducts += `${productTitle}: (${productQuantity})\n`;
         }
     });
@@ -56,31 +59,79 @@ function deleteProduct(id) {
 
 ///ajax
 document.addEventListener("DOMContentLoaded", function () {
-    const buttons = document.querySelectorAll(".toggle-button");
-    buttons.forEach(button => {
+    // Lógica para los botones de "done"
+    const doneButtons = document.querySelectorAll(".toggle-done-button");
+    doneButtons.forEach(button => {
         button.addEventListener("click", function () {
             const taskId = this.getAttribute("data-id");
-            toggleTaskStatus(taskId, this);
+            toggleTaskStatus(taskId, this, '/tasks/' + taskId + '/toggleDone', 'btn-success', 'btn-dark', '<i class="fas fa-check"></i>', '<i class="fas fa-plus"></i>');
         });
     });
 
-    function toggleTaskStatus(taskId, button) {
-        fetch(`/tasks/${taskId}/toggleDone`, { method: "POST" })
+    // Lógica para los botones de "pedido"
+    const pedidoButtons = document.querySelectorAll(".toggle-pedido-button");
+    pedidoButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            const taskId = this.getAttribute("data-id");
+            toggleTaskStatus(taskId, this, '/tasks/' + taskId + '/togglePedidos', 'btn-warning', 'btn-secondary', 'Pedir','<i class="fas fa-check"></i>');
+        });
+    });
+
+    // Función generalizada para alternar el estado de cualquier botón
+    function toggleTaskStatus(taskId, button, url, activeClass, inactiveClass, activeText, inactiveText) {
+        fetch(url, { method: "POST" })
             .then(response => {
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }
-                // Cambiar la clase del botón después de cambiar el estado del producto
-                button.classList.toggle("btn-success");
-                button.classList.toggle("btn-dark");
-                // Cambiar el texto del botón
-                const buttonText = button.textContent.trim();
-                button.textContent = buttonText === "Listo" ? "Pedir" : "Listo";
-                // Aquí puedes manejar la respuesta si es necesario
-                console.log("Estado del producto cambiado exitosamente");
+    
+                // Cambiar la clase del botón "Pedir"
+                button.classList.toggle(activeClass);
+                button.classList.toggle(inactiveClass);
+    
+                // Cambiar el texto del botón "Pedir"
+                const buttonContent = button.innerHTML.trim();
+                if (buttonContent === activeText) {
+                    button.innerHTML = inactiveText;  // Aquí colocamos el icono
+                    button.setAttribute("data-comentario", "Pedir");  // Actualizar el atributo data-comentario
+                } else {
+                    button.innerHTML = activeText;  // Aquí colocamos el texto
+                    button.setAttribute("data-comentario", "");  // Actualizar el atributo data-comentario
+                }
+    
+                // Obtener el comentario desde el atributo data-comentario
+                const comentarioText = button.getAttribute("data-comentario");
+                
+                // Actualizar el comentario en la celda correspondiente
+                const comentarioCell = button.closest('tr').querySelector('.comentario'); // Busca la celda dentro de la misma fila
+                if (comentarioCell) {
+                    comentarioCell.textContent = comentarioText; // Actualiza el texto de la celda
+                }
+    
+                // Aquí actualizamos el ícono del segundo botón (el reloj)
+                const relojButton = button.closest('tr').querySelector('.toggle-reloj-button');
+                if (relojButton) {
+                    const relojIcon = relojButton.querySelector('i');
+                    if (relojIcon.classList.contains('fa-hourglass-start')) {
+                        // Si el icono actual es de reloj, lo cambiamos a check
+                        relojIcon.classList.remove('fa-hourglass-start');
+                        relojIcon.classList.add('fa-check');
+                        relojIcon.style.color = '#1ae3aa'; // Cambiar color a verde
+                    } else {
+                        // Si es un check, lo cambiamos a reloj
+                        relojIcon.classList.remove('fa-check');
+                        relojIcon.classList.add('fa-hourglass-start');
+                        relojIcon.style.color = '#5d6af4'; // Cambiar color a azul
+                    }
+                }
+    
+                console.log("Estado del producto y reloj cambiados exitosamente");
             })
             .catch(error => {
                 console.error("Hubo un problema al cambiar el estado del producto:", error);
             });
     }
+    
+
 });
+

@@ -14,15 +14,21 @@
       {{!-- <td>{{@index}}</td> --}}
       <td class="producto">{{title}}</td>
       <td class="cantidad">{{description}}</td>
+      </td>
       <td class="acciones">
         <div class="btn-group">
           {{#if done}}
-          <button class="btn btn-success toggle-button" data-id="{{_id}}">Listo</button>
+          <button class="btn btn-success toggle-done-button" data-id="{{_id}}"><i class="fas fa-check"></i></button>
           {{else}}
-          <button class="btn btn-dark toggle-button" data-id="{{_id}}">Pedir</button>
+          <button class="btn btn-dark toggle-done-button" data-id="{{_id}}"><i class="fas fa-plus"></i></button>
           {{/if}}
 
+          {{#if pedido}} 
+          <a href="/tasks/{{_id}}/readComment" class="btn btn-dark"><i class="fas fa-bell" style="color: #ec2f2f;"></i></a>
+          {{else}}
           <a href="/tasks/{{_id}}/edit" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a>
+          {{/if}}
+
           {{!-- <a href="/tasks/{{_id}}/delete" class="btn btn-danger"><i class="fas fa-trash"></i></a> --}}
           {{!-- agrego una funcion para luego ejecutar detro de mi sweet alert la ruta:/tasks/{{_id}}/delete --}}
           <button onclick="deleteProduct('{{_id}}')" class="btn btn-danger"><i class="fas fa-trash"></i></button>
